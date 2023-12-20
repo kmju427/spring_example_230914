@@ -3,6 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.example.lesson03.mapper.ReviewMapper">
+	<!-- EX01 -->
 	<select id="selectReview" parameterType="int" resultType="com.example.lesson03.domain.Review">
 		SELECT
 			`id`
@@ -67,6 +68,7 @@
 		)
 	</insert>
 	
+	<!-- EX03 -->
 	<update id="updateReviewById" parameterType="map">
 		UPDATE `new_review`
 		SET
@@ -75,4 +77,13 @@
 		WHERE
 			`id` = #{id}
 	</update>
+	
+	<!-- EX04 -->
+	<delete id="deleteReviewById" parameterType="int">
+		DELETE
+		FROM
+			`new_review`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>
