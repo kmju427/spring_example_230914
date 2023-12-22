@@ -2,6 +2,7 @@ package com.example.lesson04;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +28,8 @@ public class Lesson04Ex02Controller {
 	// 방금 추가된 학생 화면 & DB insert
 	@PostMapping("/add-student")
 	public String addStudent(
-			@ModelAttribute Student student // 태그의 name 속성 파라미터와 이름이 같은 필드에 매핑
-			) {
+			@ModelAttribute Student student, // 태그의 name 속성 파라미터와 이름이 같은 필드에 매핑
+			Model model) {
 		// DB insert
 		studentBO.addStudent(student);
 		
@@ -36,8 +37,10 @@ public class Lesson04Ex02Controller {
 		int id = student.getId();
 		
 		// selectStudentById -> 완성
+		Student latestStudent = studentBO.getStudentById(id);
 		
 		// Model 객체에 담는다. (jsp에서 사용하기 위해)
+		model.addAttribute("student", latestStudent);
 		
 		// 화면 뿌리기 -> 테이블
 		return "lesson04/afterAddStudent";

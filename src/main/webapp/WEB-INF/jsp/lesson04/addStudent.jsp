@@ -20,7 +20,7 @@
 				<input type="text" id="name" name="name" class="form-control col-4">
 			</div>
 			<div class="form-group">
-				<label for="phoneNumber">핸드폰 번호</label>
+				<label for="phoneNumber">휴대폰 번호</label>
 				<input type="text" id="phoneNumber" name="phoneNumber" class="form-control col-4">
 			</div>
 			<div class="form-group">
