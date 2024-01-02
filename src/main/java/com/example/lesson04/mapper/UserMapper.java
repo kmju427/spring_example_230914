@@ -20,4 +20,9 @@ public interface UserMapper {
 	// output : User(있거나 or null)
 	public User selectLatestUser();
 	
+	// Lesson06Ex02
+	// input : name / output : boolean(true - 중복, false - 중복 X)
+	// '0'이면 거짓, '0이 아닌 수'면 참 (count함수 사용)
+	public boolean isDuplicationByName(String name);
+	
 } // public interface UserMapper

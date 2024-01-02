@@ -24,4 +24,10 @@ public class UserBO {
 		return userMapper.selectLatestUser();
 	}
 	
+	// Lesson06Ex02
+	// input : name / output : boolean(true - 중복, false - 중복 X)
+	public boolean isDuplicationByName(String name) {
+		return userMapper.isDuplicationByName(name);
+	}
+	
 } // public class UserBO
