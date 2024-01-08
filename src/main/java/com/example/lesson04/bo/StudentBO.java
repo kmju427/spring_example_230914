@@ -1,6 +1,7 @@
 package com.example.lesson04.bo;
 
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,39 @@ public class StudentBO {
 				.build();
 		
 		return studentRepository.save(student);
+	}
+	
+	// JPA Update
+	public StudentEntity updateStudentDreamJobById(int id, String dreamJob) {
+		// select
+		StudentEntity student = studentRepository.findById(id).orElse(null);
+		
+		// update - save
+		if (student != null) {
+			student = student.toBuilder() // 기존 필드값들은 유지하고 일부 필드만 변경 - toBuilder()
+						.dreamJob(dreamJob)
+						.build(); // ★★★ 반드시 다시 저장해야 한다!!!
+			
+			// update
+			student = studentRepository.save(student);
+		}
+		
+		return student; // student or null
+	}
+	
+	// JPA Delete
+	public void deleteStudentById(int id) {
+		// select
+		// 방법 1
+//		StudentEntity student = studentRepository.findById(id).orElse(null);
+//		if (student != null) {
+//			studentRepository.delete(student);
+//		}
+		
+		// delete
+		// Optional - null 검사 생략하기 위해 사용
+		Optional<StudentEntity> studentOptional = studentRepository.findById(id);
+		studentOptional.ifPresent(s -> studentRepository.delete(s));
 	}
 	
 	// MyBatis Insert
