@@ -3,6 +3,8 @@ package com.example.lesson07.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.lesson07.entity.StudentEntity;
 
@@ -28,7 +30,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Integer>
 	// 3. Delete(ID가 있음)
 	// void delete(Entity 객체)
 	
-	// EX02
+	// EX02 - 1
 	// 조회하는 여러 가지 방법
 	// 1. List<Entity 객체> findAll();
 	
@@ -56,5 +58,14 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Integer>
 	
 	// 9. 'id'가 1 ~ 5인 데이터 조회(between)
 	public List<StudentEntity> findByIdBetween(int startId, int endId);
+	
+	// EX02 - 2 - JPQL(Entity에 조회)
+	// 엄밀히 말하면 entity에 조회하는 것
+	// @Param - ibatis가 아닌 것으로 선택
+	// @Query(value = "select st from StudentEntity st where st.dreamJob =:dreamJob") // JPQL 문법
+	
+	// 직접 DB를 조회한다. 
+	@Query(value = "select * from new_student where dreamJob =:dreamJob", nativeQuery = true) // nativeQuery - SQL문 조회
+	public List<StudentEntity> findByDreamJob(@Param("dreamJob") String dreamJob);
 	
 } // public interface StudentRepository
